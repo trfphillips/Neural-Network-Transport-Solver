@@ -1,0 +1,148 @@
+ Multi-dimensional convolutional filters for solving PDEs with
+ linear and higher order based methods.
+ The higher order FEM are modified FEM approaches for convolutions.
+
+ afilt_nxnx_isotropic.csv:
+ The isotropic diffusion filter D^2.
+ FORTRAN output code... then the actual output of the code...
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+    do k=1,krang
+    do j=1,jrang
+       rsum_afilt_nxnx_overi(:)=0.0
+       do idim=1,ndim
+          rsum_afilt_nxnx_overi(:) = rsum_afilt_nxnx_overi(:) &
+                                   + afilt_nxnx(idim,:,j,k,ibase)
+       end do
+       write(27,*) rsum_afilt_nxnx_overi(:)
+    end do
+    end do
+ end do
+ -0.33333333333333381      -0.33333333333333337      -0.33333333333333381     
+ -0.33333333333333337        2.6666666666666687      -0.33333333333333337     
+ -0.33333333333333381      -0.33333333333333337      -0.33333333333333381     
+
+ afilt_nxnx.csv:
+ The isotropic diffusion filter D^2 but in the x-,y-, and z- directions only.
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+ do idim=1,ndim
+    do k=1,krang
+    do j=1,jrang
+       write(27,*) afilt_nxnx(idim,:,j,k,ibase)
+    end do
+    end do
+ end do
+ end do
+ -0.16666666666666691       0.33333333333333381      -0.16666666666666691     
+ -0.66666666666666718        1.3333333333333344      -0.66666666666666718     
+ -0.16666666666666691       0.33333333333333381      -0.16666666666666691     
+ -0.16666666666666691      -0.66666666666666718      -0.16666666666666691     
+  0.33333333333333381        1.3333333333333344       0.33333333333333381     
+ -0.16666666666666691      -0.66666666666666718      -0.16666666666666691     
+
+ afilt_nxnx_all.csv:
+ The isotropic entire diffusion filter Dxx, Dxy,  Dyx, Dyy etc.
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+ do idim=1,ndim
+ do jdim=1,ndim
+    do k=1,krang
+    do j=1,jrang
+       write(27,*) afilt_nxnx_all(idim+(jdim-1)*ndim,:,j,k,ibase)
+    end do
+    end do
+ end do
+ end do
+ end do
+ -0.16666666666666691       0.33333333333333381      -0.16666666666666691     
+ -0.66666666666666718        1.3333333333333344      -0.66666666666666718     
+ -0.16666666666666691       0.33333333333333381      -0.16666666666666691     
+ -0.25000000000000028        5.5511151231257827E-017  0.25000000000000022     
+   0.0000000000000000        0.0000000000000000        0.0000000000000000     
+  0.25000000000000028       -5.5511151231257827E-017 -0.25000000000000022     
+ -0.25000000000000022       -5.5511151231257827E-017  0.25000000000000028     
+   0.0000000000000000        0.0000000000000000        0.0000000000000000     
+  0.25000000000000022        5.5511151231257827E-017 -0.25000000000000028     
+ -0.16666666666666691      -0.66666666666666718      -0.16666666666666691     
+  0.33333333333333381        1.3333333333333344       0.33333333333333381     
+ -0.16666666666666691      -0.66666666666666718      -0.16666666666666691     
+
+ afilt_nnx.csv:
+ The gradient (advection) filters in the x-, y-, z- directions
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+ do idim=1,ndim
+    do k=1,krang
+    do j=1,jrang
+       write(27,*) afilt_nnx(idim,:,j,k,ibase)
+    end do
+    end do
+ end do
+ end do
+  -8.3333333333333454E-002   0.0000000000000000        8.3333333333333454E-002
+ -0.33333333333333359        0.0000000000000000       0.33333333333333359     
+  -8.3333333333333454E-002   0.0000000000000000        8.3333333333333454E-002
+  -8.3333333333333454E-002 -0.33333333333333359       -8.3333333333333454E-002
+   0.0000000000000000        0.0000000000000000        0.0000000000000000     
+   8.3333333333333454E-002  0.33333333333333359        8.3333333333333454E-002
+
+ afilt_nxn.csv:
+ The conservative gradient (advection) filters in the x-, y-, z- directions
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+ do idim=1,ndim
+    do k=1,krang
+    do j=1,jrang
+       write(27,*) afilt_nxn(idim,:,j,k,ibase)
+    end do
+    end do
+ end do
+ end do
+   8.3333333333333454E-002   0.0000000000000000       -8.3333333333333454E-002
+  0.33333333333333359        0.0000000000000000      -0.33333333333333359     
+   8.3333333333333454E-002   0.0000000000000000       -8.3333333333333454E-002
+   8.3333333333333454E-002  0.33333333333333359        8.3333333333333454E-002
+   0.0000000000000000        0.0000000000000000        0.0000000000000000     
+  -8.3333333333333454E-002 -0.33333333333333359       -8.3333333333333454E-002
+
+ afilt_nn.csv:
+ The consistent mass matrix filter.
+ jrang=1+(nfilt_width-1)*jswitch
+ krang=1+(nfilt_width-1)*kswitch
+ do ibase=1,nbase_print
+ do k=1,krang
+ do j=1,jrang
+    write(27,*) afilt_nn(:,j,k)
+ end do
+ end do
+ end do
+   2.7777777777777821E-002  0.11111111111111124        2.7777777777777821E-002
+  0.11111111111111124       0.44444444444444464       0.11111111111111124     
+   2.7777777777777821E-002  0.11111111111111124        2.7777777777777821E-002
+
+ afilt_ml.csv:
+ The lumped mass term (scalar for this node/cell).
+ do ibase=1,nbase_print
+    write(27,*) sum(afilt_nn(:,:,:,ibase))
+ end do
+   1.0000000000000009     
+
+ afilt_ml_check.csv:
+ The lumped mass term (scalar for this node/cell).
+ write(27,*) (2./real(nacross-1))**ndim
+   4.0000000000000000     
+
+ dxele_dim.csv:
+ The dimensions of the hexahedra element.
+ write(27,*) dxele_dim(:)
+   1.0000000000000000        1.0000000000000000     
+
+ integer_options_used.csv:
+ write(27,*) nacross, ndim, iall_basis_funs, nbase_print
+           2           2           0           1
