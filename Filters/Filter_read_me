@@ -1,0 +1,16 @@
+The files for the different filters are in files: afilt_ndim=2_nacross=*_nbase_print=1.csv
+The four files are associated with different polynomial orders:
+p=1 (linear FEM)        corresponds to nacross=2
+p=2 (quadratic ConvFEM) corresponds to nacross=3
+p=3 (cubic ConvFEM)     corresponds to nacross=4
+p=4 (quintic ConvFEM)   corresponds to nacross=5
+
+w_x (gradient in x) corresponds to the variables afilt_nnx.csv in the files with idim=1
+w_y (gradient in x) corresponds to the variables afilt_nnx.csv in the files with idim=2
+
+w_m (mass matrix) corresponds to the variables afilt_nn.csv in the files
+
+w_Diffxx (curvature in x direction) corresponds to the variables afilt_nxnx.csv in the files with idim=1
+w_Diffyy (curvature in x direction) corresponds to the variables afilt_nxnx.csv in the files with idim=2
+
+w_Diff (Laplacian) corresponds to the variables afilt_nxnx_isotropic.csv in the files
